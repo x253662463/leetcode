@@ -32,13 +32,19 @@ class solutionTest extends TestCase
         return [
             [[2, 4, 3], [5, 6, 4], [7, 0, 8]],
             [[1], [1], [2]],
-            [[3, 2], [7], [0, 3]]
+            [[5], [5], [0, 1]],
+            [[3, 2], [7], [0, 3]],
         ];
     }
 
+    /**
+     * 通过数组创建链表
+     * @param $array
+     * @return ListNode|null
+     */
     private function createNodeFromArray($array) {
         $listNode = null;
-        for ($i = count($array); $i >= 0; $i--) {
+        for ($i = count($array) - 1; $i >= 0; $i--) {
             $node = new ListNode($array[$i], $listNode);
             $listNode = $node;
         }

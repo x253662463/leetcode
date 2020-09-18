@@ -27,29 +27,34 @@ class ListNode
 class solution
 {
 
+
+    /**
+     * @param $l1 ListNode
+     * @param $l2 ListNode
+     * @return ListNode
+     */
     public function addTwoNumbers($l1, $l2) {
-        $c1 = $l1;
-        $c2 = $l2;
-        $result = new ListNode(0);
-        $d = $result;
-        $sum = 0;
-        while ($c1 != null || $c2 !== null) {
-            $sum /= 10;
-            if ($c1 != null) {
-                $sum += $c1->val;
-                $c1 = $c1->next;
+        $carry = 0;
+        $result = new ListNode();
+        $current = $result;
+        while ($l1 !== null || $l2 !== null) {
+            $sum = $carry;
+            if ($l1 !== null) {
+                $sum += $l1->val;
+                $l1 = $l1->next;
             }
-            if ($c2 != null) {
-                $sum += $c2->val;
-                $c2 = $c2->next;
+            if ($l2 !== null) {
+                $sum += $l2->val;
+                $l2 = $l2->next;
             }
-            $d->next = new ListNode($sum % 10);
-            $d = $d->next;
+            $node = new ListNode($sum % 10);
+            $current->next = $node;
+            $current = $current->next;
+            $carry = $sum >= 10 ? 1 : 0;
         }
-        if ($sum / 10 == 1) {
-            $d->next = new ListNode(1);
+        if ($carry == 1) {
+            $current->next = new ListNode(1, null);
         }
         return $result->next;
-
     }
 }
