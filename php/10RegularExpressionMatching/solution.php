@@ -50,22 +50,38 @@ class solution
 {
 
     public function isMatch($s, $p) {
-        var_dump(date('H:i'));exit;
-        for ($i = 0, $j = 0; $i < strlen($s); $i++) {
-            if ($p[$j] == '*') {
-                if ($s[$i] == $s[$i - 1]) {
-                    continue;
-                } else {
-                    return false;
-                }
-            }
-            if ($s[$i] == $p[$j] || $p[$j] == '.') {
-                $j++;
-                continue;
-            }
+        if ($s == null || $p == null) {
             return false;
         }
-        return true;
+        $dp = [];
+        $dp[0][0] = true;
+        for ($i = 0; $i < strlen($p); $i++) {
+            if ($p[$i] == '*' && $dp[0][$i - 1]) {
+                $dp[0][$i + 1] = true;
+            }
+        }
+        for ($i = 0; $i < strlen($s); $i++) {
+            for ($j = 0; $j < strlen($p); $j++) {
+                if ($p[$j] == '.') {
+                    $dp[$i + 1][$j + 1] = $dp[$i][$j];
+                }
+
+                if ($p[$j] == $s[$i]) {
+                    $dp[$i + 1][$j + 1] = $dp[$i][$j];
+                }
+
+                if ($p[$j] == '*') {
+                    if ($p[$j - 1] != $s[$i] && $p[$j - 1] != '.') {
+                        $dp[$i + 1][$j + 1] = $dp[$i + 1][$j - 1];
+                    } else {
+                        $dp[$i + 1][$j + 1] = ($dp[$i + 1][$j] || $dp[$i][$j + 1] || $dp[$i + 1][$j - 1]);
+                    }
+                }
+            }
+        }
+        var_dump($s . '=======' . $p);
+        var_dump($dp);
+        return $dp[strlen($s)][strlen($p)];
     }
 
 }

@@ -1,6 +1,6 @@
-package _1TwoSum
+package _1two_sum
 
-func towSum(nums []int, target int) []int {
+func twoSum(nums []int, target int) []int {
 	left := map[int]int{}
 
 	for id, num := range nums {
