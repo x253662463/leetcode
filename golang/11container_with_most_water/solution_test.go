@@ -1,4 +1,4 @@
-package _1two_sum
+package solution
 
 import (
 	"github.com/stretchr/testify/assert"
@@ -6,22 +6,17 @@ import (
 )
 
 type params struct {
-	s        string
-	p        string
-	expected bool
+	height   []int
+	expected int
 }
 
 func TestTwoSum(t *testing.T) {
 	testParam := []params{
-		{"aa", "a", false},
-		{"aa", "a*", true},
-		{"ab", ".*", true},
-		{"aab", "c*a*b", true},
-		{"mississippi", "mis*is*p*.", false},
+		{[]int{1, 8, 6, 2, 5, 4, 8, 3, 7}, 49},
 	}
 
 	for _, tt := range testParam {
-		actual := isMatch(tt.s, tt.p)
+		actual := maxArea(tt.height)
 		assert.Equal(t, tt.expected, actual)
 	}
 
