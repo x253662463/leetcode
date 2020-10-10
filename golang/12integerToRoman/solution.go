@@ -1,26 +1,18 @@
 package solution
 
 func intToRoman(num int) string {
-	romanMap := map[int]string{
-		1:    "I",
-		5:    "V",
-		10:   "X",
-		50:   "L",
-		100:  "C",
-		500:  "D",
-		1000: "M",
+	M := []string{
+		"", "M", "MM", "MMM",
+	}
+	C := []string{
+		"", "C", "CC", "CCC", "CD", "D", "DC", "DCC", "DCCC", "CM",
+	}
+	X := []string{
+		"", "X", "XX", "XXX", "XL", "L", "LX", "LXX", "LXXX", "XC",
+	}
+	I := []string{
+		"", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX",
 	}
 
-	result := ""
-
-	for {
-		if num == 0 {
-			break
-		}
-		if num%10 == 50 {
-
-		}
-	}
-
-	return result
+	return M[num/1000] + C[(num%1000)/100] + X[(num%100)/10] + I[num%10]
 }
